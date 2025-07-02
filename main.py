@@ -29,7 +29,7 @@ def gerenciar_livros():
     id_livro = len(livros) + 1
     titulo = input("Título do livro: ")
     autor = input("Autor do livro: ")
-    livros.append(livro(id_livro, titulo, autor))
+    livros.append(livros(id_livro, titulo, autor))
     print("Livro cadastrado com sucesso!")
 
 def gerenciar_usuario():
