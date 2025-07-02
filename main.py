@@ -2,7 +2,7 @@ from dataclasses import dataclass
 diaAtual = 0
 
 @dataclass
-class livro:
+class Livro:
     id: int
     titulo: str
     autor: str
@@ -42,25 +42,25 @@ def realizar_emprestimo():
     global dia_atual
     id_usuario = int(input("ID do usuário: "))
     id_livro = int(input("ID do livro: "))
-    livro = buscar_livro(id_livro)
+    Livro = buscar_livro(id_livro)
 
-    if livro and livro.disponivel:
+    if Livro and Livro.disponivel:
         dias_para_devolver = 7  
         emprestimos.append(Emprestimo(id_usuario, id_livro, dia_atual, dia_atual + dias_para_devolver))
-        livro.disponivel = False
+        Livro.disponivel = False
         print("Empréstimo realizado com sucesso!")
     else:
         print("Livro indisponível ou não encontrado.")
 
-def devolução():
+def devolucao():
     global dia_atual
     id_livro = int(input("ID do livro a ser devolvido: "))
 
     for emp in emprestimos:
         if emp.id_livro == id_livro and emp.dia_devolucao == -1:
             emp.dia_devolucao = dia_atual
-            livro = buscar_livro(id_livro)
-            livro.disponivel = True
+            Livro = buscar_livro(id_livro)
+            Livro.disponivel = True
             dias_atraso = max(0, dia_atual - emp.dia_previsto)
             multa = dias_atraso * 1.5  
             print(f"Livro devolvido. Dias de atraso: {dias_atraso}. Multa: R${multa:.2f}")
@@ -68,8 +68,8 @@ def devolução():
     print("Empréstimo não encontrado ou livro já devolvido.")
 
 def buscar_livro(id_livro):
-    for livro in livros:
-        if livro.id == id_livro:
+    for Livro in livros:
+        if Livro.id == id_Livro:
             return livro
     return None
 
@@ -80,14 +80,14 @@ def gerenciar_tempo():
     print(f"Dia atual: {dia_atual}")
 
 def listar_livros():
-    for livro in livros:
-        status = "Disponível" if livro.disponivel else "Emprestado"
-        print(f"ID: {livro.id} | Título: {livro.titulo} | Autor: {livro.autor} | {status}")
+    for Livro in livros:
+        status = "Disponível" if Livro.disponivel else "Emprestado"
+        print(f"ID: {Livro.id} | Título: {Livro.titulo} | Autor: {Livro.autor} | {status}")
 
 def relatorio():
     print("\n===== RELATÓRIO GERAL =====")
     total_livros = len(livros)
-    emprestados = sum(not livro.disponivel for livro in livros)
+    emprestados = sum(not Livro.disponivel for Livro in livros)
     disponiveis = total_livros - emprestados
 
     total_usuarios = len(usuarios)
@@ -127,7 +127,7 @@ def menu():
         elif opcao == "3":
             realizar_emprestimo()
         elif opcao == "4":
-            devolução()
+            devolucao()
         elif opcao == "5":
             listar_livros()
         elif opcao == "6":
