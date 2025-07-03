@@ -140,7 +140,7 @@ def menu():
         elif opcao == "7":
             relatorio()
         elif opcao == "0":
-            print("Saindo da aplicação. Até mais!")
+            print("Saindo do sistema")
             break
         else:
             print("Opção inválida.")
